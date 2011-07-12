@@ -16,18 +16,22 @@ start_link() ->
 init([]) ->
     #one_for_one{
       children = [
-                   #one_for_one{
-                      id = some_sup,
-                      children = [
-                                  #worker{
-                                     id = some,
-                                     restart = permanent,
-                                     start_func = {?MODULE, some_start_link, [some]}
-                                    }
-                                 ]
-                     }
+                  #one_for_one{
+                     id = first 
+                    },
+                  #one_for_one{
+                                id = some_sup,
+                                registered = some_sup,
+                                children = [
+                                            #worker{
+                                               id = some,
+                                               restart = permanent,
+                                               start_func = {?MODULE, some_start_link, [some]}
+                                              }
+                                           ]
+                              }
                  ]
-                  
+      
      }.
 
 some_start_link(_Name) ->

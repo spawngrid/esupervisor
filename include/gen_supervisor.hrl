@@ -17,6 +17,7 @@
 
 -record(supervisor, {
           id :: term(),
+          registered = false :: term(),
           restart_strategy = one_for_one :: one_for_one | one_for_all | rest_for_one | 
                                    simple_one_for_one,
           max_restarts = {1, 60} :: {pos_integer(), pos_integer()},
@@ -28,6 +29,7 @@
         
 -record(one_for_one, {
           id :: term(),
+          registered = false :: term(),
           max_restarts = {1,60} :: {pos_integer(), pos_integer()},
           children = [] :: [gen_supervisor:supervisable()],
           %%
@@ -37,6 +39,7 @@
 
 -record(one_for_all, {
           id :: term(),
+          registered = false :: term(),
           max_restarts = {1,60} :: {pos_integer(), pos_integer()},
           children = [] :: [gen_supervisor:supervisable()],
           %%
@@ -46,6 +49,7 @@
 
 -record(rest_for_one, {
           id :: term(),
+          registered = false :: term(),
           max_restarts = {1,60} :: {pos_integer(), pos_integer()},
           children = [] :: [gen_supervisor:supervisable()],
           %%
@@ -55,6 +59,7 @@
 
 -record(simple_one_for_one, {
           id :: term(),
+          registered = false :: term(),
           max_restarts = {1,60} :: {pos_integer(), pos_integer()},
           children = [] :: [gen_supervisor:supervisable()],
           %%

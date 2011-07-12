@@ -39,10 +39,12 @@ start_link(Module, Args) ->
 start_link(SupName, Module, Args) ->
     supervisor:start_link(SupName, ?MODULE, {Module, Args}).
 
--spec start_sup(atom(), supervisor()) -> {ok, pid()}.
+-spec start_sup(atom() | undefined, supervisor()) -> {ok, pid()}.
 
-start_sup(Id, SupervisorSpec) ->       
-    supervisor:start_link({local, Id}, ?MODULE, {spec, SupervisorSpec}).
+start_sup(false, SupervisorSpec) ->
+    supervisor:start_link(?MODULE, {spec, SupervisorSpec});
+start_sup(Reg, SupervisorSpec) ->       
+    supervisor:start_link({local, Reg}, ?MODULE, {spec, SupervisorSpec}).
 
 %% Internal functions
 init_result(ignore) ->
@@ -147,65 +149,70 @@ maybe_convert_supervisors([Spec|Specs]) ->
     [maybe_convert_supervisor(Spec)|maybe_convert_supervisors(Specs)].
 
 maybe_convert_supervisor(#one_for_one{ 
-                            id = Id, restart = Restart,
+                            id = Id,
+                            registered = Reg, restart = Restart,
                             shutdown = Shutdown
                            } = Sup) ->
     #child{
             id = Id,
             type = supervisor,
-            start_func = {?MODULE, start_sup, [Id, Sup]},
+            start_func = {?MODULE, start_sup, [Reg, Sup]},
             restart = Restart,
             shutdown = Shutdown,
             modules = [?MODULE]
           };
 
 maybe_convert_supervisor(#one_for_all{ 
-                            id = Id, restart = Restart,
+                            id = Id,
+                            registered = Reg, restart = Restart,
                             shutdown = Shutdown
                            } = Sup) ->
     #child{
             id = Id,
             type = supervisor,
-            start_func = {?MODULE, start_sup, [Id, Sup]},
+            start_func = {?MODULE, start_sup, [Reg, Sup]},
             restart = Restart,
             shutdown = Shutdown,
             modules = [?MODULE]
           };
 
 maybe_convert_supervisor(#rest_for_one{ 
-                            id = Id, restart = Restart,
+                            id = Id,
+                            registered = Reg, restart = Restart,
                             shutdown = Shutdown
                            } = Sup) ->
     #child{
             id = Id,
             type = supervisor,
-            start_func = {?MODULE, start_sup, [Id, Sup]},
+            start_func = {?MODULE, start_sup, [Reg, Sup]},
             restart = Restart,
             shutdown = Shutdown,
             modules = [?MODULE]
           };
 
 maybe_convert_supervisor(#simple_one_for_one{ 
-                            id = Id, restart = Restart,
+                            id = Id,
+                            registered = Reg, restart = Restart,
                             shutdown = Shutdown
                            } = Sup) ->
     #child{
             id = Id,
             type = supervisor,
-            start_func = {?MODULE, start_sup, [Id, Sup]},
+            start_func = {?MODULE, start_sup, [Reg, Sup]},
             restart = Restart,
             shutdown = Shutdown,
             modules = [?MODULE]
           };
 
 maybe_convert_supervisor(#supervisor{ 
-                            id = Id, restart = Restart,
+                            id = Id,
+                            registered = Reg, restart = Restart,
                             shutdown = Shutdown
                            } = Sup) ->
     #child{
             id = Id,
             type = supervisor,
-            start_func = {?MODULE, start_sup, [Id, Sup]},
+            start_func = {?MODULE, start_sup, [Reg, Sup]},
             restart = Restart,
             shutdown = Shutdown,
             modules = [?MODULE]

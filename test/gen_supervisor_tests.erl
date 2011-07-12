@@ -2,10 +2,11 @@
 -include_lib("eunit/include/eunit.hrl").
 
 t_starts_supervisor() ->
-    ?assertMatch([{some_sup, _, _, _}], supervisor:which_children(test_sup)).
+    ?assertMatch([{some_sup, _, _, _},{first, _, _, _}], supervisor:which_children(test_sup)),
+    ?assertMatch(Pid when is_pid(Pid), whereis(some_sup)).
 
 t_nested_supervisor() ->
-    [{some_sup, Pid, _, _}] = supervisor:which_children(test_sup),
+    [{some_sup, Pid, _, _},{first, _, _, _}] = supervisor:which_children(test_sup),
     ?assertMatch([{some, _, _, _}], supervisor:which_children(Pid)).
 
 gen_supervisor_test_() ->
