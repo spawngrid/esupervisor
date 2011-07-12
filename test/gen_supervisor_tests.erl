@@ -3,7 +3,9 @@
 
 t_starts_supervisor() ->
     ?assertMatch([{some_sup, _, _, _},{first, _, _, _}], supervisor:which_children(test_sup)),
-    ?assertMatch(Pid when is_pid(Pid), whereis(some_sup)).
+    ?assertMatch(Pid when is_pid(Pid), whereis(some_sup)),
+    ?assertEqual(undefined, whereis(first)).
+
 
 t_nested_supervisor() ->
     [{some_sup, Pid, _, _},{first, _, _, _}] = supervisor:which_children(test_sup),
