@@ -1,6 +1,6 @@
 -module(test_sup).
--behaviour(gen_supervisor).
--include_lib("gen_supervisor/include/gen_supervisor.hrl").
+-behaviour(esupervisor).
+-include_lib("esupervisor/include/esupervisor.hrl").
 
 %% API
 -export([start_link/0]).
@@ -11,7 +11,7 @@
 -export([init/1]).
 
 start_link() ->
-    gen_supervisor:start_link({local, ?MODULE}, ?MODULE, []).
+    esupervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
 init([]) ->
     #one_for_one{
