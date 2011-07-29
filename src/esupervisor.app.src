@@ -1,4 +1,4 @@
-{application, gen_supervisor,
+{application, esupervisor,
  [
   {description, "'Least surprise' supervisor API"},
   {vsn, git},

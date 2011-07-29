@@ -21,7 +21,7 @@
           restart_strategy = one_for_one :: one_for_one | one_for_all | rest_for_one | 
                                    simple_one_for_one,
           max_restarts = {1, 60} :: {pos_integer(), pos_integer()},
-          children = [] :: [gen_supervisor:supervisable()],
+          children = [] :: [esupervisor:supervisable()],
           %%
           restart = permanent :: permanent | transient | temporary,
           shutdown = infinity :: brutal_kill | timeout() | infinity
@@ -31,7 +31,7 @@
           id :: term(),
           registered = false :: term(),
           max_restarts = {1,60} :: {pos_integer(), pos_integer()},
-          children = [] :: [gen_supervisor:supervisable()],
+          children = [] :: [esupervisor:supervisable()],
           %%
           restart = permanent :: permanent | transient | temporary,
           shutdown = infinity :: brutal_kill | timeout() | infinity
@@ -41,7 +41,7 @@
           id :: term(),
           registered = false :: term(),
           max_restarts = {1,60} :: {pos_integer(), pos_integer()},
-          children = [] :: [gen_supervisor:supervisable()],
+          children = [] :: [esupervisor:supervisable()],
           %%
           restart = permanent :: permanent | transient | temporary,
           shutdown = infinity :: brutal_kill | timeout() | infinity
@@ -51,7 +51,7 @@
           id :: term(),
           registered = false :: term(),
           max_restarts = {1,60} :: {pos_integer(), pos_integer()},
-          children = [] :: [gen_supervisor:supervisable()],
+          children = [] :: [esupervisor:supervisable()],
           %%
           restart = permanent :: permanent | transient | temporary,
           shutdown = infinity :: brutal_kill | timeout() | infinity
@@ -61,7 +61,7 @@
           id :: term(),
           registered = false :: term(),
           max_restarts = {1,60} :: {pos_integer(), pos_integer()},
-          children = [] :: [gen_supervisor:supervisable()],
+          children = [] :: [esupervisor:supervisable()],
           %%
           restart = permanent :: permanent | transient | temporary,
           shutdown = infinity :: brutal_kill | timeout() | infinity

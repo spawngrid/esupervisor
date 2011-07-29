@@ -1,6 +1,6 @@
--module(gen_supervisor).
+-module(esupervisor).
 -behaviour(supervisor).
--include_lib("gen_supervisor/include/gen_supervisor.hrl").
+-include_lib("esupervisor/include/esupervisor.hrl").
 
 -export([start_link/2, start_link/3]).
 -export([behaviour_info/1]).
