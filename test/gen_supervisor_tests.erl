@@ -18,7 +18,7 @@ gen_supervisor_test_() ->
               {ok, SupPid} = test_sup:start_link(),
               SupPid
       end,
-      fun (SupPid) ->
+      fun (_SupPid) ->
               application:stop(gen_supervisor)
       end,
      [
