@@ -67,5 +67,5 @@ init([]) ->
 ```
 
 The above example will define a `one_for_one` supervisor supervising two other supervisors, `first`
-and `some_sup` (registered as `some_sup`), and `some_sup` sofo supervisor supervises a worker process
-`some` that will be restarted permanently.
+and `some_sup` (registered as `some_sup`), and `some_sup` sofo supervisor supervises worker processes
+that are started with `some_worker:start_link`.
