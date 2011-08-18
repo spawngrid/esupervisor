@@ -5,6 +5,7 @@
 -export([start_link/2, start_link/3]).
 -export([behaviour_info/1]).
 -export([start_sup/2]).
+-export([spec/1]).
 
 %% Supervisor callbacks
 -export([init/1]).
